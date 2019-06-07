@@ -27,9 +27,9 @@ Answer *get_indices_of_item_weights(int *weights, int length, int limit)
 
       return answer; 
     }
-
   }
-  // check to if table contains an entry for limit - weight
+  destroy_hash_table(ht_limit_weights);
+  destroy_hash_table(ht_indexes); 
   
   return NULL;
 }
