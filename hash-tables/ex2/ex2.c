@@ -19,11 +19,19 @@ char **reconstruct_trip(Ticket **tickets, int length)
     } 
   }
 
-  // int route_mapped = 0; 
+  int route_mapped = 0;
+  int route_place = 1; 
 
-  // while (!route_mapped) {
+  while (!route_mapped) {
+    if (strcmp(hash_table_retrieve(ht, route[route_place]), "NONE") == 0) {
+      route_mapped = 1; 
+    } else {
+      route[route_place] = hash_table_retrieve(ht, route[route_place]);
+      route_place++; 
+    }
+  }
 
-  // }
+  destroy_hash_table(ht); 
 
   return route;
 }
