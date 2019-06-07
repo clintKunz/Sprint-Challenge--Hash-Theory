@@ -1,14 +1,36 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "hashtable.h"
 #include "ex1.h"
 
 Answer *get_indices_of_item_weights(int *weights, int length, int limit)
 {
-  HashTable *ht = create_hash_table(16);
+  HashTable *ht_limit_weights = create_hash_table(16);
+  HashTable *ht_indexes = create_hash_table(16);
+  Answer *answer;
 
-  /* YOUR CODE HERE */
+  // insert weights into two hashtables, 1 for finding the difference between the limit and weight and the other for storing the index
+  for (int i = 0; i < length; i++) {
+    hash_table_insert(ht_limit_weights, weights[i], (limit - weights[i]));
+    hash_table_insert(ht_indexes, weights[i], i);
 
+    int *value = hash_table_retrieve(ht_limit_weights, weights[i]); 
+    int *check = hash_table_retrieve(ht_limit_weights, value);
+
+    if (check != -1) {
+      int *index_1 = hash_table_retrieve(ht_indexes, (limit - hash_table_retrieve(ht_limit_weights, weights[i])));
+      int *index_2 = hash_table_retrieve(ht_indexes, value); 
+
+      answer->index_1 = index_1;
+      answer->index_2 = index_2; 
+
+      return answer; 
+    }
+
+  }
+  // check to if table contains an entry for limit - weight
+  
   return NULL;
 }
 
