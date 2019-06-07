@@ -20,13 +20,13 @@ char **reconstruct_trip(Ticket **tickets, int length)
   }
 
   int route_mapped = 0;
-  int route_place = 1; 
+  int route_place = 0; 
 
   while (!route_mapped) {
     if (strcmp(hash_table_retrieve(ht, route[route_place]), "NONE") == 0) {
       route_mapped = 1; 
     } else {
-      route[route_place] = hash_table_retrieve(ht, route[route_place]);
+      route[route_place+1] = hash_table_retrieve(ht, route[route_place]);
       route_place++; 
     }
   }
